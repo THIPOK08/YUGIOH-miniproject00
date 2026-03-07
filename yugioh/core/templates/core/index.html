@@ -9,16 +9,14 @@
     <h1>{{title}}</h1>
     <hr>
     <div class="row">
-      {% for pokemon in pokemons %}
+      {% for card in cards %} 
         <div class="col-lg-3">
-          <div class="card mt-4 card-pokemon">
-            <a href="{{url_for('core.detail', id=pokemon.id)}}">
-              <img src="{{pokemon.img_url}}" alt="" class="card-img-top bg-secondary">
+          <div class="card mt-4 card-yugioh"> <a href="{{url_for('views.detail', id=card.id)}}">
+              <img src="{{card.img_url}}" alt="{{card.name}}" class="card-img-top bg-secondary">
             </a>
             <div class="card-body">
-              <h2 class="text-success">{{pokemon.name}}</h2>
-              {% for type in pokemon.types %}
-                <a href="#" class="btn btn-outline-secondary btn-sm">
+              <h2 class="text-primary">{{card.name}}</h2> {% for type in card.types %}
+                <a href="#" class="btn btn-outline-dark btn-sm">
                   {{type.name}}
                 </a>
               {% endfor %}
@@ -30,6 +28,6 @@
       
     </div>
     <br>
-    {% include "core/pagination.html" %}
+    {% include "pagination.html" %}
   </div>
 {% endblock %}

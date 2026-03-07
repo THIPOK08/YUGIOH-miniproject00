@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-3 mb-5">
+    <h1>{{ title }}</h1>
+    <hr>
+    <div class="card mt-3 shadow">
+      <div class="card-header bg-dark text-white">
+        <h3 class="mb-0"><i class="bi bi-card-heading"></i> New Card Registration</h3>
+      </div>
+      <div class="card-body">
+        <form method="post">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="name" class="form-label fw-bold">Card Name</label>
+              <input name="name" type="text" class="form-control" id="name" placeholder="e.g. Blue-Eyes White Dragon" required>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <label for="height" class="form-label fw-bold">Attack Points (ATK)</label>
+              <input name="height" type="number" class="form-control" id="height" placeholder="e.g. 3000" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="weight" class="form-label fw-bold">Defense Points (DEF)</label>
+              <input name="weight" type="number" class="form-control" id="weight" placeholder="e.g. 2500" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label fw-bold">Card Effect / Description</label>
+            <textarea name="description" class="form-control" id="description" rows="4" placeholder="Enter card abilities or lore..."></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="img_url" class="form-label fw-bold">Card Image URL</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
+              <input name="img_url" type="url" class="form-control" id="img_url" placeholder="https://example.com/card-image.jpg" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="pokemon_types" class="form-label fw-bold">Card Attribute / Type</label>
+            <select name="pokemon_types" class="form-select" id="pokemon_types" multiple size="5">
+              {% for type in pokemon_types %}
+                <option value="{{ type.id }}">{{ type.name }}</option>
+              {% endfor %}
+            </select>
+            <div class="form-text text-muted">Hold Ctrl (Windows) or Command (Mac) to select multiple types.</div>
+          </div>
+
+          <hr>
+          
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{{ url_for('core.index') }}" class="btn btn-outline-secondary me-md-2">Cancel</a>
+            <button type="submit" class="btn btn-primary px-5">
+              <i class="bi bi-plus-circle"></i> Add To Collection
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

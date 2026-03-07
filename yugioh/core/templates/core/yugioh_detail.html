@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  {{ card.name }} - Detail
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-3">Card Information</h1>
+    <hr>
+    <div class="row">
+      <h1 class="text-primary">{{ card.name }}</h1>
+    </div>
+    <div class="row">
+      <div class="col-md mt-3">
+        <img src="{{ card.img_url }}" alt="{{ card.name }}" class="img-thumbnail shadow-sm">
+      </div>
+      <div class="col-md mt-3 mb-3">
+        <h2 class="text-primary">Card Description:</h2>
+        <p class="lead" style="white-space: pre-wrap;">{{ card.description }}</p>
+        
+        <div class="row mt-4">
+          <div class="col-6">
+            <h2 class="text-danger">ATK:</h2>
+            <h3>{{ card.attack if card.attack is not none else '???' }}</h3>
+          </div>
+          <div class="col-6">
+            <h2 class="text-info">DEF:</h2>
+            <h3>{{ card.defense if card.defense is not none else '???' }}</h3>
+          </div>
+        </div>
+
+        <br>
+        <h2 class="text-primary">Attribute / Type</h2>
+        {% for type in card.types %}
+            <span class="btn btn-outline-dark btn-sm disabled">
+              {{ type.name }}
+            </span>
+        {% endfor %}
+        
+        <br>
+        <hr>
+        <div class="float-end">
+          <a href="{{ url_for('views.home') }}" class="btn btn-outline-primary">
+            <i class="bi bi-skip-backward-btn"></i>
+            Back to Deck
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

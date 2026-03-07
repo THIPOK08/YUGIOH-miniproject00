@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  {{title}}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-3 mb-3">
+    <h1>{{title}}</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <a href="{{url_for('views.new_card')}}" class="btn btn-primary shadow-sm">
+          <i class="bi bi-plus-square-fill"></i>
+          Register New Card
+        </a>
+      </div>
+      <div class="col-md-6 text-end">
+        <span class="badge bg-dark">Total Cards: {{ cards|length if cards is iterable else '0' }}</span>
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover mt-3 align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" style="width: 10%">#</th>
+            <th scope="col" style="width: 50%">Card Name</th>
+            <th scope="col" style="width: 25%">Created Date</th>
+            <th scope="col" style="width: 15%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for card in cards %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>
+                <strong>{{ card.name }}</strong>
+              </td>
+              <td>{{ card.created_at.strftime('%Y-%m-%d %H:%M') if card.created_at else 'N/A' }}</td>
+              <td>
+                <a href="{{ url_for('views.detail', id=card.id) }}" class="btn btn-sm btn-outline-info">
+                  <i class="bi bi-eye"></i> View
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+          
+          {% if not cards %}
+            <tr>
+              <td colspan="4" class="text-center text-muted">No cards found in your deck.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
