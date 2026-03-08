@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 import sqlalchemy as sa
 
 # เปลี่ยนชื่อ Blueprint เป็น card_bp หรือคงเดิมไว้ก็ได้ แต่ในที่นี้ผมปรับให้สื่อสารง่ายขึ้น
-card_bp = Blueprint('card', __name__, template_folder='templates')
+yugioh_bp = Blueprint('card', __name__, template_folder='templates')
 
 @card_bp.route('/')
 @login_required
