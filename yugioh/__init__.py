@@ -32,6 +32,6 @@ def create_app():
     app.register_blueprint(users_bp, url_prefix='/users')
     
     # ระบบจัดการการ์ด (My Collection/New Card)
-    app.register_blueprint(pokemon_bp, url_prefix='/my-deck') 
+    app.register_blueprint(yugioh_bp, url_prefix='/my-deck') 
     
     return app

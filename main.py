@@ -1,3 +1,3 @@
-from pokemon import create_app
+from yugioh import create_app
 
 app = create_app()
