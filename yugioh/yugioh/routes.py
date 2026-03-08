@@ -8,7 +8,7 @@ import sqlalchemy as sa
 # เปลี่ยนชื่อ Blueprint เป็น card_bp หรือคงเดิมไว้ก็ได้ แต่ในที่นี้ผมปรับให้สื่อสารง่ายขึ้น
 yugioh_bp = Blueprint('card', __name__, template_folder='templates')
 
-@card_bp.route('/')
+@yugioh_bp.route('/')
 @login_required
 def index():
     # ดึงเฉพาะการ์ดที่เป็นของ User คนที่ล็อกอินอยู่ (My Collection)
@@ -18,7 +18,7 @@ def index():
                            title='My Card Collection',
                            cards=cards)
 
-@card_bp.route('/new', methods=['GET', 'POST'])
+@yugioh_bp.route('/new', methods=['GET', 'POST'])
 @login_required
 def new_card():
     # ดึงประเภทการ์ด (เช่น Monster, Spell, Trap) มาแสดงใน Dropdown
