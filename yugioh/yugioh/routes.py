@@ -14,7 +14,7 @@ def index():
     # ดึงเฉพาะการ์ดที่เป็นของ User คนที่ล็อกอินอยู่ (My Collection)
     query = sa.select(Card).where(Card.user_id == current_user.id)
     cards = db.session.scalars(query).all()
-    return render_template('pokemon/index.html', # ใช้ไฟล์เดิมที่คุณมี
+    return render_template('yugioh/index.html', # ใช้ไฟล์เดิมที่คุณมี
                            title='My Card Collection',
                            cards=cards)
 
@@ -27,11 +27,11 @@ def new_card():
     
     if request.method == 'POST':
         name = request.form.get('name')
-        atk = request.form.get('height')   # รับค่าจากช่อง ATK ในฟอร์ม
-        def_val = request.form.get('weight') # รับค่าจากช่อง DEF ในฟอร์ม
+        atk = request.form.get('ATK')   # รับค่าจากช่อง ATK ในฟอร์ม
+        def_val = request.form.get('DEF') # รับค่าจากช่อง DEF ในฟอร์ม
         description = request.form.get('description')
         img_url = request.form.get('img_url')
-        selected_types = request.form.getlist('pokemon_types')
+        selected_types = request.form.getlist('yugioh_types')
 
         # จัดการเรื่องความสัมพันธ์ Many-to-Many ของ Types
         p_types = []
@@ -68,6 +68,6 @@ def new_card():
             db.session.rollback()
             flash(f'Error: {str(e)}', 'danger')
 
-    return render_template('pokemon/new_pokemon.html', # ใช้ไฟล์เดิมที่คุณมี
+    return render_template('yugioh/yugioh.html', # ใช้ไฟล์เดิมที่คุณมี
                            title='Register New Card',
                            pokemon_types=card_types)

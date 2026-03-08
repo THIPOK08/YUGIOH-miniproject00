@@ -5,7 +5,7 @@ from yugioh.extensions import db, login_manager, bcrypt
 from yugioh.models import User, Type, Card # เปลี่ยนจาก Pokemon เป็น Card
 from yugioh.core.routes import core_bp
 from yugioh.users.routes import users_bp
-from yugioh.yugioh.routes import pokemon_bp
+from yugioh.yugioh.routes import yugioh_bp
 
 def create_app():
     app = Flask(__name__)
