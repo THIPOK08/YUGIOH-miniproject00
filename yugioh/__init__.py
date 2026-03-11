@@ -9,9 +9,10 @@ from yugioh.yugioh.routes import yugioh_bp
 
 def create_app():
     app = Flask(__name__)
-    
-    # การตั้งค่า Config (ใช้ค่า Default ถ้าหา Environment Variable ไม่เจอ)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///yugioh.db')
+    db_uri = os.environ.get('DATABASE_URL', 'sqlite:///yugioh.db')
+    if db_uri and db_uri.startswith("postgres://"):
+        db_uri = db_uri.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'yugioh-secret-key-123')
 
     # Initializing Extensions
