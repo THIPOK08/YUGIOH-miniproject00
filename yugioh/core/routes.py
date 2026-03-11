@@ -6,11 +6,18 @@ from yugioh.models import db, Card, Type
 core_bp = Blueprint('core', __name__, template_folder='templates')
 
 @core_bp.route('/')
-@login_required
 def index():
     page = request.args.get('page', 1, type=int)
-    # แก้ตรงนี้เพื่อแยกเด็คของใครของมัน
-    query = sa.select(Card).where(Card.user_id == current_user.id) 
-    cards = db.session.paginate(query, per_page=8, page=page)
+    cards = db.paginate(sa.select(Card), per_page=8, page=page)
 
-    return render_template('core/index.html', title='Home', cards=cards)
+    return render_template('core/index.html',
+                           title='Yugioh Deck',
+                           cards=cards)
+
+@core_bp.route('/card/<int:id>')
+def detail(id):
+    card = db.session.get(Card, id)
+
+    return render_template('core/yugioh_detail.html',
+                           title='Card Details',
+                           card=card)
