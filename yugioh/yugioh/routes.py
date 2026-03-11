@@ -124,13 +124,3 @@ def cleanup_types():
         db.session.rollback() # ถ้าพลาดให้ดึงข้อมูลกลับมา
         return f"เกิดข้อผิดพลาด: {str(e)}"
     
-@yugioh_bp.route('/')
-@login_required # ต้องล็อกอินก่อนถึงจะเห็นการ์ดของตัวเอง
-def index():
-    # บรรทัดนี้สำคัญมาก: ต้องใส่ .where เพื่อกรองเฉพาะ user_id ของคนที่ล็อกอิน (current_user.id)
-    query = sa.select(Card).where(Card.user_id == current_user.id) 
-    cards = db.session.scalars(query).all()
-    
-    return render_template('yugioh/index.html', 
-                           title='My Card Collection',
-                           cards=cards)
