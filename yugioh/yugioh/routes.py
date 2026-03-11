@@ -27,8 +27,8 @@ def new_card():
     
     if request.method == 'POST':
         name = request.form.get('name')
-        atk = request.form.get('ATK')   # รับค่าจากช่อง ATK ในฟอร์ม
-        def_val = request.form.get('DEF') # รับค่าจากช่อง DEF ในฟอร์ม
+        atk = request.form.get('atk')   # รับค่าจากช่อง ATK ในฟอร์ม
+        def_val = request.form.get('def_val') # รับค่าจากช่อง DEF ในฟอร์ม
         description = request.form.get('description')
         img_url = request.form.get('img_url')
         selected_types = request.form.getlist('yugioh_types')
@@ -49,14 +49,15 @@ def new_card():
             return redirect(url_for('card.new_card'))
         
         # สร้าง Object การ์ดใหม่
+      # แก้ไขส่วนการสร้าง Object ใน routes.py
         new_card_obj = Card(
-            name=name,
-            height=atk,        # แมตช์กับ Field ใน DB เดิม
-            weight=def_val,    # แมตช์กับ Field ใน DB เดิม
-            description=description,
-            img_url=img_url,
-            user_id=current_user.id,
-            types=p_types
+           name=name,
+           height=atk,        # ใช้ตัวแปร atk ที่รับมาจาก request.form.get('atk')
+           weight=def_val,    # ใช้ตัวแปร def_val ที่รับมาจาก request.form.get('def_val')
+           description=description,
+           img_url=img_url,
+           user_id=current_user.id,
+           types=p_types
         )
         
         try:
@@ -75,7 +76,7 @@ def new_card():
 @yugioh_bp.route('/setup-types')
 def setup_types():
     # ลิสต์ข้อมูลประเภทการ์ดที่ต้องการเพิ่ม
-    default_types = ['Monster', 'Spell', 'Trap', 'Dragon', 'Warrior']
+    default_types = ['Monster', 'Spell', 'Trap']
     
     try:
         for t_name in default_types:
