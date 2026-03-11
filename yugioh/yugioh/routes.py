@@ -68,6 +68,6 @@ def new_card():
             db.session.rollback()
             flash(f'Error: {str(e)}', 'danger')
 
-    return render_template('yugioh/yugioh.html', # ใช้ไฟล์เดิมที่คุณมี
+    return render_template('yugioh/new_yugioh.html', # ใช้ไฟล์เดิมที่คุณมี
                            title='Register New Card',
                            pokemon_types=card_types)
