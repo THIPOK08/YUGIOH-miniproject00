@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="row g-0">
+            <div class="col-md-4 text-center p-3">
+                <img src="{{ card.img_url }}" class="img-fluid rounded shadow-sm" alt="{{ card.name }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold">{{ card.name }}</h2>
+                    <hr>
+                    <p class="card-text"><strong>ATK:</strong> {{ card.height }} | <strong>DEF:</strong> {{ card.weight }}</p>
+                    <p class="card-text">{{ card.description }}</p>
+                    <a href="{{ url_for('card.index') }}" class="btn btn-secondary">Back to Collection</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
