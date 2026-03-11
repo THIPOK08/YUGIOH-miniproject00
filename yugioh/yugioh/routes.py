@@ -71,3 +71,22 @@ def new_card():
     return render_template('yugioh/new_yugioh.html', # ใช้ไฟล์เดิมที่คุณมี
                            title='Register New Card',
                            pokemon_types=card_types)
+
+@yugioh_bp.route('/setup-types')
+def setup_types():
+    # ลิสต์ข้อมูลประเภทการ์ดที่ต้องการเพิ่ม
+    default_types = ['Monster', 'Spell', 'Trap', 'Dragon', 'Warrior']
+    
+    try:
+        for t_name in default_types:
+            # ตรวจสอบว่ามีชื่อนี้อยู่ในตาราง Type หรือยัง
+            exists = db.session.scalar(sa.select(Type).where(Type.name == t_name))
+            if not exists:
+                new_type = Type(name=t_name)
+                db.session.add(new_type)
+        
+        db.session.commit()
+        return "สำเร็จ! เพิ่มข้อมูลประเภทการ์ดเรียบร้อยแล้ว ลองไปเช็คที่หน้า /new ดูนะ"
+    except Exception as e:
+        db.session.rollback()
+        return f"เกิดข้อผิดพลาด: {str(e)}"
