@@ -11,7 +11,7 @@
     <div class="row">
       {% for card in cards %} 
         <div class="col-lg-3">
-          <div class="card mt-4 card-yugioh"> <a href="{{url_for('views.detail', id=card.id)}}">
+          <div class="card mt-4 card-yugioh"> <a href="{{url_for('card.detail', id=card.id)}}">
               <img src="{{card.img_url}}" alt="{{card.name}}" class="card-img-top bg-secondary">
             </a>
             <div class="card-body">
