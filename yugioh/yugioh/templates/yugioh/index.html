@@ -39,7 +39,7 @@
               </td>
               <td>{{ card.created_at.strftime('%Y-%m-%d %H:%M') if card.created_at else 'N/A' }}</td>
               <td>
-                <a href="{{ url_for('views.detail', id=card.id) }}" class="btn btn-sm btn-outline-info">
+                <a href="{{ url_for('card.detail', id=card.id) }}" class="btn btn-sm btn-outline-info">
                   <i class="bi bi-eye"></i> View
                 </a>
               </td>

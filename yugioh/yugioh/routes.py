@@ -91,3 +91,18 @@ def setup_types():
     except Exception as e:
         db.session.rollback()
         return f"เกิดข้อผิดพลาด: {str(e)}"
+    
+@yugioh_bp.route('/detail/<int:id>')
+@login_required
+def detail(id):
+    # ดึงข้อมูลการ์ดตาม id ที่ส่งมา
+    card = db.session.get(Card, id)
+    
+    # ถ้าไม่เจอการ์ด หรือการ์ดนั้นไม่ใช่ของ User คนที่ล็อกอินอยู่ ให้เด้งกลับ
+    if not card or card.user_id != current_user.id:
+        flash('Card not found!', 'danger')
+        return redirect(url_for('card.index'))
+    
+    return render_template('yugioh/detail.html', # นายต้องมีไฟล์ detail.html ในโฟลเดอร์ templates/yugioh ด้วยนะ
+                           title=card.name,
+                           card=card)
