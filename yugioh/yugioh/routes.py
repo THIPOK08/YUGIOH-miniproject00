@@ -106,3 +106,20 @@ def detail(id):
     return render_template('yugioh/detail.html', # นายต้องมีไฟล์ detail.html ในโฟลเดอร์ templates/yugioh ด้วยนะ
                            title=card.name,
                            card=card)
+
+@yugioh_bp.route('/cleanup-types')
+def cleanup_types():
+    # ระบุชื่อที่จะลบ (Dragon และ Warrior ที่นายไม่อยากได้แล้ว)
+    to_delete = ['Dragon', 'Warrior']
+    try:
+        for name in to_delete:
+            # ค้นหาชื่อในตาราง Type ของฐานข้อมูล
+            t = db.session.scalar(sa.select(Type).where(Type.name == name))
+            if t:
+                db.session.delete(t) # สั่งลบข้อมูลทิ้ง
+        
+        db.session.commit() # ยืนยันการลบ
+        return "ลบ Dragon และ Warrior ออกจากฐานข้อมูลสำเร็จ! ลองกลับไปหน้า /new ดูนะ"
+    except Exception as e:
+        db.session.rollback() # ถ้าพลาดให้ดึงข้อมูลกลับมา
+        return f"เกิดข้อผิดพลาด: {str(e)}"
