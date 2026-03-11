@@ -17,7 +17,7 @@
         </li>
         {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a href="#" class="nav-link">My Collection</a>
+            <a href="{{ url_for('card.index') }}" class="nav-link">My Collection</a>
           </li>
         {% endif %}
       </ul>
