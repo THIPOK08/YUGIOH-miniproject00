@@ -41,7 +41,7 @@ def new_card():
                 p_types.append(t)
 
         # ตรวจสอบว่าชื่อการ์ดซ้ำในระบบหรือไม่
-        check_query = sa.select(Card).where(Card.name == name)
+        check_query = sa.select(Card).where(Card.name == name, Card.user_id == current_user.id)
         existing_card = db.session.scalar(check_query)
         
         if existing_card:
