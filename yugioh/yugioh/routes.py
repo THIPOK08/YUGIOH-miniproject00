@@ -70,7 +70,7 @@ def new_card():
 
     return render_template('yugioh/new_yugioh.html', # ใช้ไฟล์เดิมที่คุณมี
                            title='Register New Card',
-                           pokemon_types=card_types)
+                           card_types=card_types)
 
 @yugioh_bp.route('/setup-types')
 def setup_types():
