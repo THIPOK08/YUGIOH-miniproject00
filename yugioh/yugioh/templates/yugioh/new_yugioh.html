@@ -44,9 +44,9 @@
           </div>
 
           <div class="mb-3">
-            <label for="pokemon_types" class="form-label fw-bold">Card Attribute / Type</label>
-            <select name="pokemon_types" class="form-select" id="pokemon_types" multiple size="5">
-              {% for type in pokemon_types %}
+            <label for="yugioh_types" class="form-label fw-bold">Card Attribute / Type</label>
+            <select name="yugioh_types" class="form-select" id="yugioh_types" multiple size="5">
+              {% for type in card_types %}
                 <option value="{{ type.id }}">{{ type.name }}</option>
               {% endfor %}
             </select>
